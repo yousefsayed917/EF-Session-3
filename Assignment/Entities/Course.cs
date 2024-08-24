@@ -10,12 +10,12 @@ namespace Assignment.Entities
     public class Course
     {
         public int Id { get; set; }
-        public string Name { get; set; }=string.Empty;
-        public string Description { get; set; } = string.Empty;
-        public string Duration {  get; set; } = string.Empty;
+        public string Name { get; set; }
+        public string Description { get; set; } 
+        public string Duration {  get; set; } 
         #region Topic
         [InverseProperty("Courses")]
-        public Topic Topic { get; set; }=new Topic();
+        public Topic Topic { get; set; }
         [ForeignKey("topic")]
         public int? TopicId {  get; set; } 
         #endregion

@@ -4,6 +4,7 @@ using Assignment.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Assignment.Migrations
 {
     [DbContext(typeof(Iti))]
-    partial class ItiModelSnapshot : ModelSnapshot
+    [Migration("20240824001034_changeInstructorIdToManager")]
+    partial class changeInstructorIdToManager
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -72,9 +75,7 @@ namespace Assignment.Migrations
 
                     b.HasKey("DeptId");
 
-                    b.HasIndex("InstructorId")
-                        .IsUnique()
-                        .HasFilter("[InstructorId] IS NOT NULL");
+                    b.HasIndex("InstructorId");
 
                     b.ToTable("Departments");
                 });
@@ -213,11 +214,11 @@ namespace Assignment.Migrations
 
             modelBuilder.Entity("Assignment.Entities.Department", b =>
                 {
-                    b.HasOne("Assignment.Entities.Instructor", "Manager")
-                        .WithOne("Manage")
-                        .HasForeignKey("Assignment.Entities.Department", "InstructorId");
+                    b.HasOne("Assignment.Entities.Instructor", "Manage")
+                        .WithMany()
+                        .HasForeignKey("InstructorId");
 
-                    b.Navigation("Manager");
+                    b.Navigation("Manage");
                 });
 
             modelBuilder.Entity("Assignment.Entities.InctructorCourse", b =>
@@ -281,12 +282,6 @@ namespace Assignment.Migrations
                     b.Navigation("Instructors");
 
                     b.Navigation("Students");
-                });
-
-            modelBuilder.Entity("Assignment.Entities.Instructor", b =>
-                {
-                    b.Navigation("Manage")
-                        .IsRequired();
                 });
 
             modelBuilder.Entity("Assignment.Entities.Topic", b =>

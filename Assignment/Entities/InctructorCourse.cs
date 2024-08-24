@@ -14,7 +14,7 @@ namespace Assignment.Entities
         [ForeignKey("Course")]
         public int CourseId { get; set; }
         public int Evaluate { get; set; }
-        public Instructor Instructor { get; set; } = new Instructor();
-        public Course Course { get; set; } = new Course();
+        public Instructor Instructor { get; set; } 
+        public Course Course { get; set; }
     }
 }

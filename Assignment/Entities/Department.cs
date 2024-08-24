@@ -15,7 +15,7 @@ namespace Assignment.Entities
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int DeptId { get; set; }
-        public string Name { get; set; }=string.Empty;
+        public string Name { get; set; }
         public TimeOnly HiringDate { get; set; }
         #region Student
         [InverseProperty("Department")]
@@ -24,10 +24,10 @@ namespace Assignment.Entities
         #region Instructor
         [InverseProperty("Department")]
         public ICollection<Instructor> Instructors { get; set; } = new HashSet<Instructor>();
-
-        public Instructor Manage { get; set; }=new Instructor();
+        [InverseProperty("Manage")]
+        public Instructor Manager { get; set; }
         [ForeignKey("Instructor")]
-        public int?InstructorId { get; set; }
+        public int? InstructorId { get; set; }
         #endregion
     }
 }

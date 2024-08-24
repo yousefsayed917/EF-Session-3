@@ -10,13 +10,13 @@ namespace Assignment.Entities
     public class Student
     {
         public int Id { get; set; }
-        public string FName { get; set; } = string.Empty;
-        public string LName { get; set; } =string.Empty;
-        public string Address { get; set; } = string.Empty;
+        public string FName { get; set; } 
+        public string LName { get; set; } 
+        public string Address { get; set; } 
         public int? Age { get; set; }
         #region Department
         [InverseProperty("Students")]
-        public Department Department { get; set; }= new Department();
+        public Department Department { get; set; }
         [ForeignKey("Department")]
         public int?DeptId { get; set; }
         #endregion
